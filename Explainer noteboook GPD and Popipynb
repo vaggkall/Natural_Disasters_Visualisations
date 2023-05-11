@@ -1,0 +1,948 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "d1bdea4b-6f74-4e1d-8800-1970ee9a570c",
+   "metadata": {},
+   "source": [
+    "# Natural disasters, Climate change and Economic development"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8042e7dd-7b8b-4a19-bb4b-37ba823a550b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b14d2c17-9ec3-490a-abbf-52be0f515bb1",
+   "metadata": {},
+   "source": [
+    "## 1. Motivation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "eeeeb4a3-6d70-4db7-8212-5dfc519f262e",
+   "metadata": {},
+   "source": [
+    "### 1.1 What is your dataset?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8a7c763b-3a10-4151-8dc0-c8776b7f8b1e",
+   "metadata": {},
+   "source": [
+    "We first decided we wanted to analyze and visualize the effect of natural disasters, especially droughts and heatwaves; the dataset on the impact of natural disasters from 1900 was obtained from.... . It is known that natural disasters are getting more frequent with climate change, but we wanted to look into how natural disasters affected different countries based on how developed their economy os and their economic indicators. Therefore we also used economic and social data, such as GDP,  agriculture data, income data, and water and energy use. We also used population data to normalize and visualize our data. The economic and social data came from the world bank."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8bd90766-aa9d-4a4b-a8fb-054ebeb9844d",
+   "metadata": {},
+   "source": [
+    "### 1.2 Why did you choose this/these particular dataset(s)?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c5526837-d5ee-480f-bcd2-f660cc95ee1d",
+   "metadata": {},
+   "source": [
+    "The dataset about the effect of disasters from 1900 was our main interest, motivation and gave us the idea for the project. The population data was used to normalize and in some of the visualizations. We chose the specific economic indicators because .... "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "433b66a3-8767-4bfc-b3e3-53df03035d59",
+   "metadata": {},
+   "source": [
+    "### 1.3 What was your goal for the end user´s experience?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "063dcc91-aff7-419c-bd29-a3efe737f871",
+   "metadata": {},
+   "source": [
+    "We wanted to tell the story of how natural disasters do not discriminate. Instead, they exacerbate existing inequalities, hitting countries with limited economic resources the hardest in an interactive and exploratory way. Give the reader a better insight into how natural disasters affect less economically developed countries and that the impact of climate change is also a server equity case. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "43b27319-5389-4d1c-9e92-f20a747310c5",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ff57face-2472-4a8e-8b70-74f877c93336",
+   "metadata": {},
+   "source": [
+    "## 2. Basic stats "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "76eb10e9-8952-42d0-8a1b-8be1a586161e",
+   "metadata": {},
+   "source": [
+    "We begin by importing all of the packages needed for the project"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "4fe8d679-47c6-4fea-85f0-6bb827746ae3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "%matplotlib inline\n",
+    "import os\n",
+    "import matplotlib.pyplot as plt\n",
+    "import calplot\n",
+    "from pandas.api.types import CategoricalDtype\n",
+    "import seaborn as sns\n",
+    "import plotly.express as px\n",
+    "import folium\n",
+    "import chardet\n",
+    "import geopandas as gpd\n",
+    "from geopandas.tools import geocode\n",
+    "import warnings\n",
+    "from geopy.geocoders import Nominatim"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "e35a0d38-0125-471b-83d9-49f9a3b36404",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import plotly.express as px\n",
+    "import plotly.graph_objs as go"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "02d5e144-3d4d-4055-9bea-da1ad33cdbfd",
+   "metadata": {},
+   "source": [
+    "### 2.1 Data preperation and cleaning \n",
+    "#### *Write about your choices in data cleaning and preprocessing"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf913eef-c15c-4ecc-a712-0b11d7846dfc",
+   "metadata": {},
+   "source": [
+    "Lets now import all the datasets "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "aae0549f-518c-4b73-85dd-da7166681197",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "975e2d14-1289-4096-80c9-f8a50f5c5b80",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Opening file\n",
+    "\n",
+    "names = [\"Dis No\"]\n",
+    "\n",
+    "#Natural_Disasters = pd.read_csv('NaturalDisastersv3.xlsx',names=names, lineterminator='\\n', nrows=25882)\n",
+    "Natural_Disasters = pd.read_excel('NaturalDisasters.xlsx')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "b4967820-75e5-42f9-ab0f-a2c8babaa9a8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#there are also data for technological disasters so we are choosing Natural Disasters\n",
+    "\n",
+    "Natural_Disasters = Natural_Disasters[Natural_Disasters['Disaster Group']=='Natural']\n",
+    "\n",
+    "#there are some natural disasters that there are very few data\n",
+    "Natural_Disasters = Natural_Disasters[(Natural_Disasters['Disaster Subtype']!='Landslide')& (Natural_Disasters['Disaster Subtype']!='Tsunami') & (Natural_Disasters['Disaster Subtype']!='Mudslide')&(Natural_Disasters['Disaster Subtype']!='Ground movement')&(Natural_Disasters['Disaster Subtype']!='Lava flow')& (Natural_Disasters['Disaster Subtype']!='Rockfall')& (Natural_Disasters['Disaster Subtype']!='Grasshopper')& (Natural_Disasters['Disaster Subtype']!='Locust')& (Natural_Disasters['Disaster Subtype']!='Worms')& (Natural_Disasters['Disaster Subtype']!='Subsidence')\n",
+    "                    & (Natural_Disasters['Disaster Subtype']!='Ash fall')]\n",
+    "# print( pd.unique(Natural_Disasters['Disaster Subtype'].values))\n",
+    "# & (Natural_Disasters['Disaster Subtype']!='Tsunami') & (Natural_Disasters['Disaster Subtype']!='Mudslide')&(Natural_Disasters['Disaster Subtype']!='Ground movement')]\n",
+    "\n",
+    "\n",
+    "\n",
+    "#cols=[\"year\",\"month\",\"day\"]\n",
+    "#df['date'] = df[cols].apply(lambda x: '-'.join(x.values.astype(str)), axis=\"columns\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "7f487900-86b6-42b8-b21e-797fe53d3059",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Countries_GDPC = pd.read_excel('GDP_per_capita.xls')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "79751bbb-53fa-4c80-9840-13bc5adeee91",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "population = pd.read_excel('population.xls')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "62cbcb3a-5ad4-4970-8dc8-21404453fe45",
+   "metadata": {},
+   "source": [
+    "quite a lot of data cleaning had to take place on the data sets to be able to merge the all data together"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9d11565d-2242-441e-9e72-44a07c9e2ae0",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ebb8d5d4-2a08-4243-9e7b-210654d9c9a2",
+   "metadata": {},
+   "source": [
+    "2.1.1 GDP per captia for all of the countries in the right form, "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "dbcb88cd-24ed-4585-bacf-a35e9fa9b596",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Drop the first 3 rows of the DataFrame\n",
+    "Countries_GDPC = Countries_GDPC.drop([0, 1])\n",
+    "\n",
+    "# Set the 4th row as the column index\n",
+    "Countries_GDPC.columns = Countries_GDPC.iloc[0]\n",
+    "Countries_GDPC = Countries_GDPC.drop(Countries_GDPC.index[0])\n",
+    "\n",
+    "Countries_GDPC.index = Countries_GDPC.index.astype(int)\n",
+    "Countries_GDPC = Countries_GDPC.reset_index(drop=True)\n",
+    "\n",
+    "Countries_GDPC = Countries_GDPC.drop('Indicator Name', axis=1)\n",
+    "Countries_GDPC = Countries_GDPC.drop('Indicator Code', axis=1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7642c17b-1264-4a7d-be57-3842030239db",
+   "metadata": {},
+   "source": [
+    "Rename the year columns\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "579ce9f1-bc3d-4d6f-8dbe-2021779d99d5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "old_names = list(Countries_GDPC.columns)\n",
+    "old_names = old_names[2:]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "c581dfc6-099b-4f88-a4ef-26f469b7bee5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "new_names = [str(year) for year in range(1960, 2022)]\n",
+    "name_map = dict(zip(old_names, new_names))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "f10df4e9-1779-4846-923e-b1c888710117",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Countries_GDPC = Countries_GDPC.rename(columns=name_map)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "776f8371-124f-4814-bb18-acb414c27f25",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Countries_GDPC = Countries_GDPC.drop('Country Name', axis=1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c5f3c9b7-e2da-4a6d-bf9b-3f95ea626407",
+   "metadata": {},
+   "source": [
+    "Now we convert the dataset from having the years as columns to only having one column to indicate the years"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "fb7c27ba-ba06-4272-afea-937afc0d5596",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_melted = Countries_GDPC.melt(id_vars=['Country Code'], var_name='year', value_name='GDPC')\n",
+    "df_melted= df_melted.rename(columns={'Country Code': 'ISO','year':'Year'})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d9645d5a-380e-4d21-83d8-569b6b91d626",
+   "metadata": {},
+   "source": [
+    "Now lest do the same for the population data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "1434d0f4-b436-4f4d-bc95-0fbb88ccadde",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Drop the first 2 rows of the DataFrame\n",
+    "population = population.drop([0, 1])\n",
+    "\n",
+    "# Set the 4th row as the column index\n",
+    "population.columns = population.iloc[0]\n",
+    "population = population.drop(population.index[0])\n",
+    "\n",
+    "population.index = population.index.astype(int)\n",
+    "population = population.reset_index(drop=True)\n",
+    "population = population.drop('Indicator Name', axis=1)\n",
+    "population = population.drop('Indicator Code', axis=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "321a1d7d-6653-4cf7-8699-ead7a9476440",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "old_names = list(population.columns)\n",
+    "old_names = old_names[2:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "f0e66e5f-d0a9-4a89-90fd-b0e8011ae18b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "new_names = [str(year) for year in range(1960, 2022)]\n",
+    "name_map = dict(zip(old_names, new_names))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "f5c3d3ce-eadb-4d80-bcb8-a644a0b4ea76",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "population = population.rename(columns=name_map)\n",
+    "population = population.drop('Country Name', axis=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "1cc50c47-1738-43a8-b776-02575e5c572d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_melted_pop = population.melt(id_vars=['Country Code'], var_name='year', value_name='population')\n",
+    "df_melted_pop= df_melted_pop.rename(columns={'Country Code': 'ISO','year':'Year'})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "49f7bfca-b9da-4204-a59d-be894f9b412e",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "89ed9c0b-cbec-4fb3-b638-383c8cd47c50",
+   "metadata": {},
+   "source": [
+    "Let's now merge the natural disaster dataset with data about countries GDP per capita and population."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "51dc56f4-4a00-4bb5-a293-3e2c92bc682d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "NDdf = Natural_Disasters[['Dis No', 'Country','ISO', 'Region', 'Continent','Year','Total Deaths', 'Total Affected',\n",
+    "       \"Total Damages ('000 US$)\"]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "3e972ae1-fa07-4027-90cc-15cade868303",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#NDdf = NDdf[NDdf['Year'] >= 1973]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "43bf5ada-3e70-4c9c-a995-464529ef50ee",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ISO_Region_Continent = NDdf[['Country','ISO', 'Region', 'Continent']]\n",
+    "ISO_Region_Continent = ISO_Region_Continent.groupby(['ISO']).first().reset_index()\n",
+    "NDdf_Country = NDdf.groupby(['ISO','Year']).sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "b9c2d630-db69-4e9e-9e6c-a51733864099",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_melted['Year'] = df_melted['Year'].astype('int64')\n",
+    "df_melted_pop['Year'] = df_melted_pop['Year'].astype('int64')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "b2253682-4548-4452-a618-f02804f1d81e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC_Country = pd.merge(NDdf_Country, df_melted, on=['ISO','Year'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "7b38a057-a383-427d-95f6-af9eece2d771",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC_Country = pd.merge(ND_GDPC_Country , df_melted_pop, on=['ISO','Year'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "ed62ceec-4a84-4c03-b48d-2afe0dbc5838",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC = pd.merge(ND_GDPC_Country, ISO_Region_Continent, on=['ISO'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "20937f03-933c-4270-bc1a-1f54010ae3b7",
+   "metadata": {},
+   "source": [
+    "Let's make two new columns Deaths per 100.000 and Affected per 100.000"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "108ff7ff-abf2-4835-ad15-152e7d35b4d4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC['Deaths per 100.000'] = (ND_GDPC['Total Deaths']/ND_GDPC['population'])*1000000"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "8c61dc43-73a2-47fe-9764-a98d45efb8fa",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC['Affected per 100.000'] = (ND_GDPC['Total Affected']/ND_GDPC['population'])*1000000"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3ac93bb6-ad4d-4acb-92f0-908188dab556",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "58cc890a-9a86-42a9-a322-18dfbd349a44",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "KeyError",
+     "evalue": "\"Column(s) ['Affected per 100K', 'Deaths per 100K'] do not exist\"",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mKeyError\u001b[0m                                  Traceback (most recent call last)",
+      "Input \u001b[1;32mIn [27]\u001b[0m, in \u001b[0;36m<cell line: 1>\u001b[1;34m()\u001b[0m\n\u001b[1;32m----> 1\u001b[0m ND_GDPC_Continent \u001b[38;5;241m=\u001b[39m \u001b[43mND_GDPC\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mgroupby\u001b[49m\u001b[43m(\u001b[49m\u001b[43m[\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mContinent\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mYear\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m]\u001b[49m\u001b[43m)\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43magg\u001b[49m\u001b[43m(\u001b[49m\u001b[43m{\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mTotal Deaths\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43msum\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mTotal Affected\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43msum\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[38;5;124;43mTotal Damages (\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43m000 US$)\u001b[39;49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43msum\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mDeaths per 100K\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m:\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43msum\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\n\u001b[0;32m      2\u001b[0m \u001b[43m                                                               \u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mAffected per 100K\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m:\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43msum\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mGDPC\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m \u001b[49m\u001b[43m:\u001b[49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[38;5;124;43mmean\u001b[39;49m\u001b[38;5;124;43m'\u001b[39;49m\u001b[43m}\u001b[49m\u001b[43m)\u001b[49m\n",
+      "File \u001b[1;32m~\\anaconda3\\lib\\site-packages\\pandas\\core\\groupby\\generic.py:869\u001b[0m, in \u001b[0;36mDataFrameGroupBy.aggregate\u001b[1;34m(self, func, engine, engine_kwargs, *args, **kwargs)\u001b[0m\n\u001b[0;32m    866\u001b[0m func \u001b[38;5;241m=\u001b[39m maybe_mangle_lambdas(func)\n\u001b[0;32m    868\u001b[0m op \u001b[38;5;241m=\u001b[39m GroupByApply(\u001b[38;5;28mself\u001b[39m, func, args, kwargs)\n\u001b[1;32m--> 869\u001b[0m result \u001b[38;5;241m=\u001b[39m \u001b[43mop\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43magg\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\n\u001b[0;32m    870\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m is_dict_like(func) \u001b[38;5;129;01mand\u001b[39;00m result \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[0;32m    871\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m result\n",
+      "File \u001b[1;32m~\\anaconda3\\lib\\site-packages\\pandas\\core\\apply.py:168\u001b[0m, in \u001b[0;36mApply.agg\u001b[1;34m(self)\u001b[0m\n\u001b[0;32m    165\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39mapply_str()\n\u001b[0;32m    167\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m is_dict_like(arg):\n\u001b[1;32m--> 168\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28;43mself\u001b[39;49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43magg_dict_like\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\n\u001b[0;32m    169\u001b[0m \u001b[38;5;28;01melif\u001b[39;00m is_list_like(arg):\n\u001b[0;32m    170\u001b[0m     \u001b[38;5;66;03m# we require a list, but not a 'str'\u001b[39;00m\n\u001b[0;32m    171\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39magg_list_like()\n",
+      "File \u001b[1;32m~\\anaconda3\\lib\\site-packages\\pandas\\core\\apply.py:467\u001b[0m, in \u001b[0;36mApply.agg_dict_like\u001b[1;34m(self)\u001b[0m\n\u001b[0;32m    464\u001b[0m     selected_obj \u001b[38;5;241m=\u001b[39m obj\u001b[38;5;241m.\u001b[39m_selected_obj\n\u001b[0;32m    465\u001b[0m     selection \u001b[38;5;241m=\u001b[39m obj\u001b[38;5;241m.\u001b[39m_selection\n\u001b[1;32m--> 467\u001b[0m arg \u001b[38;5;241m=\u001b[39m \u001b[38;5;28;43mself\u001b[39;49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mnormalize_dictlike_arg\u001b[49m\u001b[43m(\u001b[49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[38;5;124;43magg\u001b[39;49m\u001b[38;5;124;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mselected_obj\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43marg\u001b[49m\u001b[43m)\u001b[49m\n\u001b[0;32m    469\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m selected_obj\u001b[38;5;241m.\u001b[39mndim \u001b[38;5;241m==\u001b[39m \u001b[38;5;241m1\u001b[39m:\n\u001b[0;32m    470\u001b[0m     \u001b[38;5;66;03m# key only used for output\u001b[39;00m\n\u001b[0;32m    471\u001b[0m     colg \u001b[38;5;241m=\u001b[39m obj\u001b[38;5;241m.\u001b[39m_gotitem(selection, ndim\u001b[38;5;241m=\u001b[39m\u001b[38;5;241m1\u001b[39m)\n",
+      "File \u001b[1;32m~\\anaconda3\\lib\\site-packages\\pandas\\core\\apply.py:585\u001b[0m, in \u001b[0;36mApply.normalize_dictlike_arg\u001b[1;34m(self, how, obj, func)\u001b[0m\n\u001b[0;32m    583\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28mlen\u001b[39m(cols) \u001b[38;5;241m>\u001b[39m \u001b[38;5;241m0\u001b[39m:\n\u001b[0;32m    584\u001b[0m         cols_sorted \u001b[38;5;241m=\u001b[39m \u001b[38;5;28mlist\u001b[39m(safe_sort(\u001b[38;5;28mlist\u001b[39m(cols)))\n\u001b[1;32m--> 585\u001b[0m         \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mKeyError\u001b[39;00m(\u001b[38;5;124mf\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mColumn(s) \u001b[39m\u001b[38;5;132;01m{\u001b[39;00mcols_sorted\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m do not exist\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n\u001b[0;32m    587\u001b[0m is_aggregator \u001b[38;5;241m=\u001b[39m \u001b[38;5;28;01mlambda\u001b[39;00m x: \u001b[38;5;28misinstance\u001b[39m(x, (\u001b[38;5;28mlist\u001b[39m, \u001b[38;5;28mtuple\u001b[39m, \u001b[38;5;28mdict\u001b[39m))\n\u001b[0;32m    589\u001b[0m \u001b[38;5;66;03m# if we have a dict of any non-scalars\u001b[39;00m\n\u001b[0;32m    590\u001b[0m \u001b[38;5;66;03m# eg. {'A' : ['mean']}, normalize all to\u001b[39;00m\n\u001b[0;32m    591\u001b[0m \u001b[38;5;66;03m# be list-likes\u001b[39;00m\n\u001b[0;32m    592\u001b[0m \u001b[38;5;66;03m# Cannot use func.values() because arg may be a Series\u001b[39;00m\n",
+      "\u001b[1;31mKeyError\u001b[0m: \"Column(s) ['Affected per 100K', 'Deaths per 100K'] do not exist\""
+     ]
+    }
+   ],
+   "source": [
+    "ND_GDPC_Continent = ND_GDPC.groupby(['Continent','Year']).agg({'Total Deaths': 'sum','Total Affected': 'sum', \"Total Damages ('000 US$)\": 'sum','Deaths per 100.000':'sum',\n",
+    "                                                               'Affected per 100.000':'sum', 'GDPC' :'mean'}) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3d1e95ea-b385-4827-abc3-48e305ae5c76",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC_2010 = ND_GDPC[ND_GDPC['Year'] >= 2010]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5107ee12-73c7-4fd7-86e5-2e7c1958c547",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ND_GDPC_1995 = ND_GDPC[ND_GDPC['Year'] >= 1995]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "21bfcc8f-7263-4ad3-b779-8a2198849644",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import plotly.express as px\n",
+    "\n",
+    "df = px.data.gapminder()\n",
+    "fig = px.scatter(ND_GDPC_2010, x=\"GDPC\", y=\"Affected per 100K\", animation_frame=\"Year\", animation_group=\"Country\",\n",
+    "           size=\"population\", color=\"Continent\", hover_name=\"Country\",\n",
+    "           log_x=True, log_y=True, size_max=55, range_x=[50,500000], range_y=[1,5000000])\n",
+    "\n",
+    "fig[\"layout\"].pop(\"updatemenus\") # optional, drop animation buttons\n",
+    "fig.update_layout(width=900, height=700)\n",
+    "fig.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c2f30e1d-325e-45b2-9466-0003d85b8d20",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = px.data.gapminder()\n",
+    "fig = px.scatter(ND_GDPC_1995, x=\"GDPC\", y=\"Affected per 100K\", animation_frame=\"Year\", animation_group=\"Country\",\n",
+    "           size=\"population\", color=\"Continent\", hover_name=\"Country\",\n",
+    "           log_x=True, log_y=True, size_max=55, range_x=[50,500000], range_y=[0.1,5000000])\n",
+    "\n",
+    "fig[\"layout\"].pop(\"updatemenus\") # optional, drop animation buttons\n",
+    "fig.update_layout(width=900, height=700)\n",
+    "fig.write_html(\"scatter_gdpc.html\")\n",
+    "fig.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "86fd6cb8-9c63-453d-8d67-6d9f27380298",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b1bd2da8-2736-4e2d-b753-0776cc149d66",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7560741a-62e3-4ddb-bfa7-9b3b139dfecb",
+   "metadata": {},
+   "source": [
+    "## 3. Data Analysis"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6b89b043-6908-4026-abcd-c5b1fcee002d",
+   "metadata": {},
+   "source": [
+    "### 3.1 Descrive your data analysis and explain what you've learned about the dataset "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "813a1b9e-f9bb-42cf-bff4-01ce5ca2c76f",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5795a12f-6fe5-4191-b0a6-c3a42d489eaf",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "db268a87-1991-4d75-86d4-9e0bf5362de4",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "05072cb8-b0cf-4810-95fd-d9bd5530804f",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "279c1404-8e28-4224-87b4-77b50a0e5218",
+   "metadata": {},
+   "source": [
+    "## 4. Genre"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ee47d1b3-4258-4097-838e-9f3af98b02b7",
+   "metadata": {},
+   "source": [
+    "### 4.1 Which tools did you use from each of the 3 categories of *Visual Narrative* (Figure 7 in Segal and Heer). Why?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1c0b0b4a-0527-48e0-9e21-c2eb389f73c7",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f168d06a-fb95-4f69-8d75-ffa0dcc35390",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "dab8d0f9-e846-40f3-b7e3-869861eec96d",
+   "metadata": {},
+   "source": [
+    "### 4.2 Which tools did you use from each of the 3 categories of *Narrative Structure* (Figure 7 in Segal and Heer). Why?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "de7f39fb-9316-47ff-b1a6-9750f2094793",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "daa24d30-8afc-43af-aff5-48f251d923d0",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "78767c51-b011-4973-84d0-f3099a75523a",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7efdd94e-5369-4272-9694-d6989b6bfe38",
+   "metadata": {},
+   "source": [
+    "## 5. Visualization"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8b176f2b-9cf9-4811-8589-8c3ef7753476",
+   "metadata": {},
+   "source": [
+    "### 5.1 Explain the visualizations you've chosen."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "41b3edea-307f-4b45-b7cc-8e56e1da88db",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8fccc238-2c1a-4695-ac27-3faa0dbd0f01",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "365ea3c5-f62b-4066-8c7f-d1ba463aec35",
+   "metadata": {},
+   "source": [
+    "### 5.2 Why are they right for the story you want to tell?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f41cfa49-e43f-499b-a7f9-64305f624f48",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3a45ecaa-98c8-45cf-b73d-ae675934b751",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0c3854ad-c690-4492-ae2f-79a7bfdee171",
+   "metadata": {},
+   "source": [
+    "## 6. Discussion. Think critically about your creation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0621dc34-94a8-4b5f-914f-fef45c571ab4",
+   "metadata": {},
+   "source": [
+    "### 6.1 What went well?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "18ef9540-c3db-4d2b-a652-1bdeea3d8d76",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "61855622-f4af-45bb-a231-1de01502fc61",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d40512ff-672c-4765-9353-cbe590c6e163",
+   "metadata": {},
+   "source": [
+    "### 6.2 What is still missing? What could be improved?, Why?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f8b31c09-93fc-4060-ada3-909de274f46d",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b5761df1-ec7d-4ef1-9fdf-4063ac479241",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "19b1ebaf-09b3-44f8-a5dd-4ce8ce593c95",
+   "metadata": {},
+   "source": [
+    "## 7. Contributions. Who did what?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7e81202b-0f4d-43ab-bb2b-68d30413196c",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fc9f896c-e6d6-4b96-9071-1dfbf9e2807e",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0c26c3ad-6a6d-491c-9ef1-8d723277a029",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ccf03cfc-7692-41f5-9942-82bad0ce4c4b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5d755a19-e96e-4cb1-a9df-16e826f00781",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "475037e5-a949-48eb-9889-6ec3d8e73cfe",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "65f8c928-022c-4276-9fad-257508879710",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0b785a85-1a85-46a5-b87d-3a7ad7a2b648",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7f3f3033-cd45-4dbc-baff-9d5093d88106",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
